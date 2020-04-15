@@ -5,7 +5,7 @@ import matplotlib.pyplot as plt
 cam = cv2.VideoCapture(0)
 w = cam.get(cv2.CAP_PROP_FRAME_WIDTH)   
 h = cam.get(cv2.CAP_PROP_FRAME_HEIGHT)
-obj = cv2.CascadeClassifier('F:/Projects/Finger Counting/data/haarcascade/palm.xml')
+obj = cv2.CascadeClassifier('.xml')
 
 
 while True:
