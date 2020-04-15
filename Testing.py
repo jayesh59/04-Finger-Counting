@@ -18,8 +18,8 @@ while True:
 
     cv2.imshow('frame', frame)
 
-    #for (x,y,w,h) in hand_rect:
-    #   cv2.rectangle(frame, (x,y) , (x+w,y+h), 255, 5)
+    for (x,y,w,h) in hand_rect:
+       cv2.rectangle(frame, (x,y) , (x+w,y+h), 255, 5)
 
     if cv2.waitKey(10) & 0xFF == 27:
         print(frame.shape)
