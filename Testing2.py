@@ -7,7 +7,7 @@ w = int(cam.get(cv2.CAP_PROP_FRAME_WIDTH))
 h = int(cam.get(cv2.CAP_PROP_FRAME_HEIGHT))
 
 ret,frame = cam.read()
-blured = cv2.blur(frame.copy(), (3,3))
+blured = cv2.blur(frame.copy(), (15,15))
 gray = cv2.cvtColor(blured, cv2.COLOR_BGR2GRAY)
 roi = gray[h-250:h,w-250:w]
     
@@ -22,7 +22,7 @@ diff1 = cv2.absdiff(trans_thresholded10,trans_thresholded40)
 while True:
     
     ret,frame = cam.read()
-    blured = cv2.blur(frame.copy(), (3,3))
+    blured = cv2.blur(frame.copy(), (5,5))
     gray = cv2.cvtColor(blured, cv2.COLOR_BGR2GRAY)
     roi = gray[h-250:h,w-250:w]
     cv2.rectangle(frame, (w-250,h-250) , (w,h), 255, 5)
@@ -38,9 +38,11 @@ while True:
 
     diff = cv2.absdiff(diff1,diff2)
     #diff = cv2.blur(diff,(5,5))
-    diff = cv2.erode(diff, (15,15), 10)
-    diff = np.expand_dims(diff, axis = 2)
+    diff = cv2.erode(diff, (5,5), 1000)
+    #diff = cv2.distanceTransform(diff, cv2.DIST_L2, 5)
 
+    diff = np.expand_dims(diff, axis = 2)
+    
     frame[h-250:h,w-250:w] = diff
 
     
