@@ -6,8 +6,8 @@ cam = cv2.VideoCapture(0)
 w = cam.get(cv2.CAP_PROP_FRAME_WIDTH)   
 h = cam.get(cv2.CAP_PROP_FRAME_HEIGHT)
 
-ret,frame = cam.read()
-background = frame.copy().astype('float')
+#ret,frame = cam.read()
+#background = None
 
 
 while True:
