@@ -5,7 +5,7 @@ import matplotlib.pyplot as plt
 cam = cv2.VideoCapture(0)
 w = cam.get(cv2.CAP_PROP_FRAME_WIDTH)   
 h = cam.get(cv2.CAP_PROP_FRAME_HEIGHT)
-obj = cv2.CascadeClassifier('.xml')
+obj = cv2.CascadeClassifier('haarcascade_palm.xml')
 
 
 while True:
