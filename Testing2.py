@@ -17,7 +17,7 @@ transformed = cv2.distanceTransform(thresholded, cv2.DIST_L2, 3)
 _ , trans_thresholded40 = cv2.threshold(transformed, 0.40*transformed.max(),255,0)
 _ , trans_thresholded10 = cv2.threshold(transformed, 0.10*transformed.max(),255,0)
 diff1 = cv2.absdiff(trans_thresholded10,trans_thresholded40)
-diff1 = cv2.erode(diff1, (5,5), 2)
+#diff1 = cv2.erode(diff1, (5,5), 3)
 
 while True:
     
@@ -33,11 +33,11 @@ while True:
     _ , trans_thresholded40 = cv2.threshold(transformed, 0.40*transformed.max(),255,0)
     _ , trans_thresholded10 = cv2.threshold(transformed, 0.10*transformed.max(),255,0)
     diff2= cv2.absdiff(trans_thresholded10,trans_thresholded40)
-    diff2 = cv2.erode(diff2, (5,5), 2)
+    #diff2 = cv2.erode(diff2, (5,5), 3)
 
 
     diff= cv2.absdiff(diff1,diff2)
-
+    diff = cv2.erode(diff, (5,5), 3)
     diff = np.expand_dims(diff, axis = 2)
 
     frame[h-250:h,w-250:w] = diff
