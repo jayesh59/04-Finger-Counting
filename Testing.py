@@ -11,11 +11,12 @@ background = frame.copy().astype('float')
 
 
 while True:
+    global background
     ret,frame = cam.read()
-    #background = frame.copy().astype('float')
+    background = frame.copy().astype('float')
     diff = cv2.absdiff(background.astype('uint8'), frame)
 
-    _ , thresholded = cv2.threshold(diff, 25, 255, cv2.THRESH_BINARY)
+    _ , thresholded = cv2.threshold(diff, 127, 255, cv2.THRESH_BINARY)
 
 
 
