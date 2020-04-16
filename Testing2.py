@@ -36,8 +36,9 @@ while True:
     #diff2 = cv2.erode(diff2, (5,5), 3)
 
 
-    diff= cv2.absdiff(diff1,diff2)
-    diff = cv2.erode(diff, (5,5), 3)
+    diff = cv2.absdiff(diff1,diff2)
+    #diff = cv2.blur(diff,(5,5))
+    diff = cv2.erode(diff, (15,15), 10)
     diff = np.expand_dims(diff, axis = 2)
 
     frame[h-250:h,w-250:w] = diff
