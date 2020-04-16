@@ -9,15 +9,16 @@ h = int(cam.get(cv2.CAP_PROP_FRAME_HEIGHT))
 while True:
     
     ret,frame = cam.read()
+    blured = cv2.blur(frame, (9,9))
+    gray = cv2.cvtColor(blured, cv2.COLOR_BGR2GRAY)
+    roi = gray[h-250:h,w-250:w]
     
-    gray = cv2.cvtColor(frame.copy(), cv2.COLOR_BGR2GRAY)
-    roi = gray[h-300:h,w-300:w]
-    _ , thresholded = cv2.threshold(roi, 240, 255, cv2.THRESH_BINARY )
+    _ , thresholded = cv2.threshold(roi, 127, 255, cv2.THRESH_BINARY + cv2.THRESH_OTSU)
 
-    cv2.rectangle(frame, (w-300,h-300) , (w,h), 255, 5)
+    cv2.rectangle(frame, (w-250,h-250) , (w,h), 255, 5)
     thresholded = np.expand_dims(thresholded, axis = 2)
 
-    frame[h-300:h,w-300:w] = thresholded
+    frame[h-250:h,w-250:w] = thresholded
     
     cv2.imshow('frame',frame)
     
