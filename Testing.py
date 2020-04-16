@@ -16,7 +16,7 @@ while True:
     #background = frame.copy().astype('float')
     diff = cv2.absdiff(background.astype('uint8'), frame)
     diff = cv2.cvtColor(diff, cv2.COLOR_BGR2GRAY)
-    _ , thresholded = cv2.threshold(diff, 127, 255, cv2.THRESH_BINARY)
+    _ , thresholded = cv2.threshold(diff, 27, 255, cv2.THRESH_BINARY)
 
 
 
