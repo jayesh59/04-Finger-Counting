@@ -16,7 +16,7 @@ while True:
     _ , thresholded = cv2.threshold(roi, 127, 255, cv2.THRESH_BINARY + cv2.THRESH_OTSU)
 
     transformed = cv2.distanceTransform(thresholded, cv2.DIST_L2, 3)
-    trans_thresholded = cv2.thresholded(transformed, 0.1*transformed.max(),255,0)
+    _ , trans_thresholded = cv2.threshold(transformed, 0.40*transformed.max(),255,0)
 
     cv2.rectangle(frame, (w-250,h-250) , (w,h), 255, 5)
     thresholded = np.expand_dims(thresholded, axis = 2)
