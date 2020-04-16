@@ -6,11 +6,13 @@ cam = cv2.VideoCapture(0)
 w = cam.get(cv2.CAP_PROP_FRAME_WIDTH)   
 h = cam.get(cv2.CAP_PROP_FRAME_HEIGHT)
 
+ret,frame = cam.read()
+background = frame.copy().astype('float')
 
 
 while True:
     ret,frame = cam.read()
-    background = frame.copy().astype('float')
+    #background = frame.copy().astype('float')
     diff = cv2.absdiff(background.astype('uint8'), frame)
 
     _ , thresholded = cv2.threshold(diff, 25, 255, cv2.THRESH_BINARY)
