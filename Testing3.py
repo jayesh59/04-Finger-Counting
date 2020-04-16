@@ -9,9 +9,9 @@ h = int(cam.get(cv2.CAP_PROP_FRAME_HEIGHT))
 ret,frame = cam.read()
 blured = cv2.blur(frame.copy(), (15,15))
 gray = cv2.cvtColor(blured, cv2.COLOR_BGR2GRAY)
-roi = gray[h-250:h,w-250:w]
+roi1 = gray[h-250:h,w-250:w]
     
-_ , thresholded1 = cv2.threshold(roi, 127, 255, cv2.THRESH_BINARY + cv2.THRESH_OTSU)
+_ , thresholded1 = cv2.threshold(roi1, 180, 255, cv2.THRESH_BINARY + cv2.THRESH_OTSU)
 '''
 transformed = cv2.distanceTransform(thresholded, cv2.DIST_L2, 3)
 _ , trans_thresholded40 = cv2.threshold(transformed, 0.40*transformed.max(),255,0)
@@ -24,10 +24,10 @@ while True:
     ret,frame = cam.read()
     blured = cv2.blur(frame.copy(), (5,5))
     gray = cv2.cvtColor(blured, cv2.COLOR_BGR2GRAY)
-    roi = gray[h-250:h,w-250:w]
+    roi2 = gray[h-250:h,w-250:w]
     cv2.rectangle(frame, (w-250,h-250) , (w,h), 255, 5)
     
-    _ , thresholded2 = cv2.threshold(roi, 127, 255, cv2.THRESH_BINARY + cv2.THRESH_OTSU)
+    _ , thresholded2 = cv2.threshold(roi2, 180, 255, cv2.THRESH_BINARY + cv2.THRESH_OTSU)
     '''
     transformed = cv2.distanceTransform(thresholded, cv2.DIST_L2, 3)
     _ , trans_thresholded40 = cv2.threshold(transformed, 0.40*transformed.max(),255,0)
@@ -43,11 +43,12 @@ while True:
     
     diff = np.expand_dims(diff, axis = 2)
     '''
-    diff = cv2.absdiff(thresholded1,thresholded2)
+    #diff = cv2.absdiff(thresholded1,thresholded2)
+    diff = cv2.absdiff(roi1,roi2)
     #diff = cv2.blur(diff,(5,5))
     #diff = cv2.erode(diff, (5,5), 1000)
     #diff = cv2.distanceTransform(diff, cv2.DIST_L2, 5)
-
+    _ ,diff = cv2.threshold(diff,127, 255,cv2.THRESH_BINARY + cv2.THRESH_OTSU)
     diff = np.expand_dims(diff, axis = 2)
 
     frame[h-250:h,w-250:w] = diff
