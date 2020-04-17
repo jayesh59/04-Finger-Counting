@@ -73,11 +73,11 @@ while True:
     frame = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
     
     if num_frames < 60:
-        calc_avg(frame,accum_weight)
+        calc_avg(frame[h-250:h,w-250:w],accum_weight)
 
     else:
 
-        a = segment(frame)#[h-250:h,w-250:w])
+        a = segment(frame[h-250:h,w-250:w])
         
         if a is not None:
             th, cont = a
@@ -100,8 +100,8 @@ while True:
             #print(len(cont))
             #print(cont_img.shape)
             #cv2.imshow('cont' , frame)
-            #display(frame, frame_dict)
-            cv2.imshow('dist atransform',th2)
+            display(frame, frame_dict)
+            #cv2.imshow('dist atransform',th2)
     num_frames += 1
 
     if cv2.waitKey(10) & 0xFF == 27:
