@@ -84,7 +84,7 @@ while True:
             th, cont = a
             
             for i in range(len(cont)):
-                cont_img = cv2.drawContours(cont_img, cont, i, 255, -1)
+                cont_img = cv2.drawContours(cont_img, cont, i, 255, cv2.FILLED)
                 #cont_img = cv2.drawContours(black, cont, 0, [255,255,255], -1)
                 #cont_img = np.expand_dims(cont_img, axis = 2)
                 _,cont_img = cv2.threshold(cont_img,127, 255, cv2.THRESH_BINARY)
