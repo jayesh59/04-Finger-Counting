@@ -84,9 +84,8 @@ while True:
             
             for i in range(len(cont)):
                 
-                cv2.fillPoly(cont_img, [cont], (255,255,255))
-                _, th2 = cv2.threshold(cont_img, 127, 255, cv2.THRESH_BINARY)
-                dist_trans = cv2.distanceTransform(cont_img, cv2.DIST_L2, 3)
+                cv2.fillPoly(cont_img, [cont], (255,255,255)) #to fill the contour instead of just drawing
+                dist_trans = cv2.distanceTransform(th, cv2.DIST_L2, 3)
                 b = diff_contours(dist_trans)
                 Dist_Thresh10, Dist_Thresh40, fingers = b
 
