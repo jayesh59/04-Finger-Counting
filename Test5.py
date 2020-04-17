@@ -84,14 +84,15 @@ while True:
             th, cont = a
             
             for i in range(len(cont)):
-                cont_img = cv2.drawContours(cont_img, cont, i, 255, cv2.FILLED)
+                #cv2.drawContours(cont_img, cont, i, 255, -1)
+                cv2.fillPoly(cont_img, [cont], (255,255,255))
                 #cont_img = cv2.drawContours(black, cont, 0, [255,255,255], -1)
                 #cont_img = np.expand_dims(cont_img, axis = 2)
-                _,cont_img = cv2.threshold(cont_img,127, 255, cv2.THRESH_BINARY)
-                _, th2 = cv2.threshold(cont_img, 127, 255, cv2.THRESH_BINARY)
-                dist_trans = cv2.distanceTransform(th2, cv2.DIST_L2, 3)
-                b = diff_contours(dist_trans)
-                Dist_Thresh10, Dist_Thresh40, fingers = b
+                #_,cont_img = cv2.threshold(cont_img,127, 255, cv2.THRESH_BINARY)
+                #_, th2 = cv2.threshold(cont_img, 127, 255, cv2.THRESH_BINARY)
+                #dist_trans = cv2.distanceTransform(th2, cv2.DIST_L2, 3)
+                # = diff_contours(dist_trans)
+                #Dist_Thresh10, Dist_Thresh40, fingers = b
 
 
                 #frame_dict = {'Thresholded':th, 'Contour':cont_img, 'Distance Transformation':dist_trans, '10% Distance Threshold':Dist_Thresh10, '40% Distance Threshold':Dist_Thresh40, 'Fingers':fingers}
@@ -102,8 +103,8 @@ while True:
             #print(type(th2))
             #print(th2.shape)
             #cv2.imshow('cont' , frame)
-            display(frame, frame_dict)
-            #cv2.imshow('dist atransform',th2)
+            #display(frame, frame_dict)
+            cv2.imshow('dist atransform',cont_img)
     num_frames += 1
 
     if cv2.waitKey(10) & 0xFF == 27:
