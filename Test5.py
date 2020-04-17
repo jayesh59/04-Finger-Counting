@@ -62,8 +62,7 @@ h = int(cap.get(cv2.CAP_PROP_FRAME_HEIGHT))
 w = int(cap.get(cv2.CAP_PROP_FRAME_WIDTH))
 num_frames = 0
 
-black = np.zeros((250,250))
-cont_img = black
+
 #black = frame.copy()[h-250:h,w-250:w]
 #black = black[:,:,:
 while True:
@@ -71,6 +70,8 @@ while True:
     _, frame = cap.read()
     frame = cv2.GaussianBlur(frame, (7,7), 0)
     frame = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
+    black = np.zeros((250,250))
+    cont_img = black
     
     if num_frames < 60:
         calc_avg(frame[h-250:h,w-250:w],accum_weight)
