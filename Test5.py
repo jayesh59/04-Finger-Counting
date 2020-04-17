@@ -19,7 +19,7 @@ def calc_avg(frame, accum_weight):
 
     cv2.accumulateWeighted(frame, background, accum_weight)
 
-def segment(frame, thresh_min = 25):
+def segment(frame, thresh_min = 20):
     global background
 
     diff = cv2.absdiff(frame,background.astype('uint8'))
@@ -84,11 +84,11 @@ while True:
             th, cont = a
             
             for i in range(len(cont)):
-                cv2.drawContours(cont_img, cont, i, 255, -1)
+                cont_img = cv2.drawContours(cont_img, cont, i, 255, -1)
                 #cont_img = cv2.drawContours(black, cont, 0, [255,255,255], -1)
                 #cont_img = np.expand_dims(cont_img, axis = 2)
                 #_,cont_img = cv2.threshold(cont_img,127, 255, cv2.THRESH_BINARY)
-                th2 = th.copy()
+                th2 = cv2.threshold(cont_img, 127, 255, cv2.THRESH_BINARY)
                 dist_trans = cv2.distanceTransform(th2, cv2.DIST_L2, 3)
                 b = diff_contours(dist_trans)
                 Dist_Thresh10, Dist_Thresh40, fingers = b
