@@ -87,7 +87,8 @@ while True:
                 #cont_img = cv2.drawContours(black, cont, 0, [255,255,255], -1)
                 #cont_img = np.expand_dims(cont_img, axis = 2)
                 #_,cont_img = cv2.threshold(cont_img,127, 255, cv2.THRESH_BINARY)
-                dist_trans = cv2.distanceTransform(th, cv2.DIST_L2, 3)
+                th2 = th.copy()
+                dist_trans = cv2.distanceTransform(th2, cv2.DIST_L2, 3)
                 b = diff_contours(dist_trans)
                 Dist_Thresh10, Dist_Thresh40, fingers = b
 
@@ -99,8 +100,8 @@ while True:
             #print(len(cont))
             #print(cont_img.shape)
             #cv2.imshow('cont' , frame)
-            display(frame, frame_dict)
-            #cv2.imshow('dist atransform',fingers)
+            #display(frame, frame_dict)
+            cv2.imshow('dist atransform',th2)
     num_frames += 1
 
     if cv2.waitKey(10) & 0xFF == 27:
