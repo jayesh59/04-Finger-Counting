@@ -69,7 +69,7 @@ while True:
     _, frame = cap.read()
     frame = cv2.GaussianBlur(frame, (7,7), 0)
     frame = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
-    black = np.zeros((250,250))
+    black = np.zeros((250,250),dtype = 'uint8')
     cont_img = black
     
     if num_frames < 60:
@@ -85,7 +85,9 @@ while True:
             for i in range(len(cont)):
                 
                 cv2.fillPoly(cont_img, [cont], (255,255,255)) #to fill the contour instead of just drawing
-                dist_trans = cv2.distanceTransform(th, cv2.DIST_L2, 3)
+                cont_img = cv2.bitwise_and(th, th, mask = cont_img)
+                dist_trans = cv2.distanceTransform(cont_img
+                , cv2.DIST_L2, 3)
                 b = diff_contours(dist_trans)
                 Dist_Thresh10, Dist_Thresh40, fingers = b
 
